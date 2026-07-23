@@ -1,0 +1,24 @@
+@import 'tailwindcss';
+
+@font-face {
+  font-family: "Syne";
+  src: url("./assets/fonts/Syne.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+}
+
+body {
+  font-family: "Syne", sans-serif;
+}
+
+@font-face {
+  font-family: "Clash Display";
+  src: url("./assets/fonts/ClashDisplay-Bold.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+}
+
+@theme {
+  --color-volt: #C8F400;
+  --color-muted: #6C6C6B;
+}
