@@ -1,10 +1,11 @@
-import React from "react";
-import { Zap, Mail, Lock, Eye } from "lucide-react";
+import React,{useState} from "react";
+import { Zap, Mail, Lock, Eye, EyeOff } from "lucide-react";
 import { useNavigate } from "react-router";
 import { useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
 
 const Login = () => {
+  const [showPassword, setShowPassword] = useState(false);
   const {
     register,
     handleSubmit,
@@ -27,7 +28,7 @@ const Login = () => {
     ) {
       toast.success("Login Successful");
       reset();
-      // navigate("/");
+      navigate("/home");
     } else {
       toast.error("Invalid email or password");
     }
@@ -135,47 +136,41 @@ const Login = () => {
             </div>
 
             {/* Password */}
-            <div className="mt-5 relative">
-              <Lock className="absolute left-5 top-4 text-[#666]" size={20} />
+           <div className="mt-5 relative">
+  <Lock className="absolute left-5 top-4 text-[#666]" size={20} />
 
-              <input
-                type="password"
-                {...register("password", {
-                  required: "Password is required",
-                  pattern: {
-                    value:
-                      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]).{8,}$/,
-                    message:
-                      "Use 8+ chars with uppercase, lowercase, number & special character",
-                  },
-                })}
-                placeholder="Password"
-                className="
-    w-full h-14 rounded-2xl
-    bg-[#1F1F1F]
-    border border-[#303030]
-    pl-14 pr-12
-    text-white
-    placeholder:text-[#666]
-    outline-none
-    focus:border-[#C8F400]
-  "
-              />
+  <input
+    type={showPassword ? "text" : "password"}
+    {...register("password", {
+      required: "Password is required",
+      pattern: {
+        value:
+          /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]).{8,}$/,
+        message:
+          "Use 8+ chars with uppercase, lowercase, number & special character",
+      },
+    })}
+    placeholder="Password"
+    className="w-full h-14 rounded-2xl bg-[#1F1F1F] border border-[#303030] pl-14 pr-12 text-white placeholder:text-[#666] outline-none focus:border-[#C8F400]"
+  />
 
-              <Eye
-                className="absolute right-5 top-4 text-[#666] cursor-pointer"
-                size={20}
-              />
+  <div
+    onClick={() => setShowPassword(!showPassword)}
+    className="absolute right-5 top-4 text-[#666] cursor-pointer"
+  >
+    {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+  </div>
 
-              {errors.password && (
-                <p className="mt-1 ml-1 text-xs text-red-500">
-                  {errors.password.message}
-                </p>
-              )}
-            </div>
+  {errors.password && (
+    <p className="mt-1 ml-1 text-xs text-red-500">
+      {errors.password.message}
+    </p>
+  )}
+</div>
 
             {/* Button */}
             <button
+              type="submit"
               className="
             mt-8
             w-full

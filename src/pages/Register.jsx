@@ -23,14 +23,14 @@ const Register = () => {
     (/[@$!%*?&]/.test(password) ? 1 : 0);
 
   const onSubmit = (data) => {
-   const userData = {
-    fullName : data.fullName,
-    email:data.email,
-    password:data.password,
-   };
+    const userData = {
+      fullName: data.fullName,
+      email: data.email,
+      password: data.password,
+    };
 
-   localStorage.setItem("user",JSON.stringify(userData))
-   console.log(userData)
+    localStorage.setItem("user", JSON.stringify(userData));
+    console.log(userData);
     toast.success("Registration Successful");
     reset();
   };
@@ -211,7 +211,10 @@ const Register = () => {
         {/* Footer */}
         <p className="mt-5 text-center text-sm text-[#6C6C6B]">
           Already have an account?
-          <span  onClick={() => navigate("/login")} className="ml-1 cursor-pointer font-semibold text-[#C8F400]">
+          <span
+            onClick={() => navigate("/")}
+            className="ml-1 cursor-pointer font-semibold text-[#C8F400]"
+          >
             Sign in
           </span>
         </p>
