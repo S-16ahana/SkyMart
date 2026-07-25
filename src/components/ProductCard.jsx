@@ -12,7 +12,7 @@ const ProductCard = ({ product }) => {
   return (
     <Link to={`/products/${product.id}`} className="block">
       <motion.div
-        whileHover={{ y: -8, scale: 1.02 }}
+        whileHover={{ y: -8 }}
         whileTap={{ scale: 0.98 }}
         transition={{ duration: 0.25 }}
         className="group bg-[#121212] border border-[#2A2A2A] rounded-[28px] overflow-hidden hover:border-[#C8F400] transition-all duration-300 cursor-pointer"
@@ -52,9 +52,7 @@ const ProductCard = ({ product }) => {
                 key={index}
                 size={13}
                 fill={
-                  index < Math.round(product.rating)
-                    ? "#FACC15"
-                    : "transparent"
+                  index < Math.round(product.rating) ? "#FACC15" : "transparent"
                 }
                 className="text-yellow-400"
               />

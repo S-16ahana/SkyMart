@@ -28,12 +28,12 @@ const Cart = () => {
       />
 
       {/* Drawer */}
-      <aside
-        className={`fixed top-0 right-0 h-screen w-[430px] bg-[#111111]
-        border-l border-[#2A2A2A] z-50 flex flex-col
-        transition-transform duration-300
-        ${isCartOpen ? "translate-x-0" : "translate-x-full"}`}
-      >
+   <aside
+className={`fixed top-0 right-0 h-screen w-full max-w-[430px] bg-[#111111]
+border-l border-[#2A2A2A] z-50 flex flex-col
+transition-transform duration-300
+${isCartOpen ? "translate-x-0" : "translate-x-full"}`}
+>
         {/* Header */}
         <div className="px-8 py-6 border-b border-[#2A2A2A] flex items-center justify-between">
           <div className="flex items-center gap-3">
