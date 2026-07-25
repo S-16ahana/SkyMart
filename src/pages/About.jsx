@@ -217,9 +217,7 @@ const About = () => {
                 <div>
                   <h3 className="text-xl font-semibold">{item.title}</h3>
 
-                  <p className="text-[#6C6C6B] mt-3 leading-7">
-                    {item.desc}
-                  </p>
+                  <p className="text-[#6C6C6B] mt-3 leading-7">{item.desc}</p>
                 </div>
               </div>
             ))}

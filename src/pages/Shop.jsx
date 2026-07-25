@@ -5,6 +5,7 @@ import SearchFilter from "../components/SearchFilter";
 import ProductCard from "../components/ProductCard";
 import Footer from "../components/Footer";
 import { useContext } from "react";
+import { useSearchParams } from "react-router";
 import { CartContext } from "../context/CartContext";
 
 const Shop = () => {
@@ -12,7 +13,12 @@ const Shop = () => {
  
 
   const [search, setSearch] = useState("");
-  const [category, setCategory] = useState("all");
+  const [searchParams] = useSearchParams();
+
+const initialCategory =
+  searchParams.get("category") || "all";
+
+const [category, setCategory] = useState(initialCategory);
   const [sort, setSort] = useState("featured");
   const { cartItems, setCartItems, isCartOpen, setIsCartOpen } =
     useContext(CartContext);
@@ -58,15 +64,17 @@ const filteredProducts = [...products]
       <div className="max-w-7xl mx-auto px-8 py-10">
         {/* Heading */}
         <div className="mb-10">
-          <h1
-            className="text-5xl text-white"
-            style={{ fontFamily: "Clash Display" }}
-          >
-            All Products
-          </h1>
+        <h1
+  className="text-5xl"
+  style={{ fontFamily: "Clash Display" }}
+>
+  {category === "all"
+    ? "All Products"
+    : `${category.charAt(0).toUpperCase() + category.slice(1)} Products`}
+</h1>
 
           <p className="text-[#6C6C6B] mt-2 text-lg">
-            {products.length} products found
+            {filteredProducts.length} products found
           </p>
         </div>
 

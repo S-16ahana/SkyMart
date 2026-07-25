@@ -127,19 +127,19 @@ const Cart = () => {
                       <div className="flex items-center gap-2">
                         <button
                           onClick={() => decreaseQty(item.id)}
-                          className="w-9 h-9 rounded-xl border border-[#333]
+                          className="w-9 h-9 text-white rounded-xl border border-[#333]
             flex items-center justify-center hover:border-[#C8F400]"
                         >
                           <Minus size={15} />
                         </button>
 
-                        <span className="text-[15px] font-medium w-4 text-center">
+                        <span className="text-[15px] text-white font-medium w-4 text-center">
                           {item.quantity}
                         </span>
 
                         <button
                           onClick={() => increaseQty(item.id)}
-                          className="w-9 h-9 rounded-xl border border-[#333]
+                          className="w-9 h-9 text-white rounded-xl border border-[#333]
             flex items-center justify-center hover:border-[#C8F400]"
                         >
                           <Plus size={15} />
