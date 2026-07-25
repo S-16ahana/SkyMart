@@ -9,6 +9,10 @@ import {
   Truck,
 } from "lucide-react";
 import Navbar from "../components/Navbar";
+import { useNavigate } from "react-router";
+import Footer from "../components/Footer";
+import { useContext } from "react";
+import { CartContext } from "../context/CartContext";
 
 const categories = [
   {
@@ -53,7 +57,9 @@ const features = [
 
 const Home = () => {
   const user = JSON.parse(localStorage.getItem("user"));
+  const navigate = useNavigate();
 
+  const { cartItems, totalPrice } = useContext(CartContext);
   return (
     <div className="bg-[#0D0D0D] min-h-screen text-white">
       <Navbar />
@@ -81,7 +87,10 @@ const Home = () => {
               </p>
 
               <div className="flex gap-5 mt-10">
-                <button className="bg-[#C8F400] text-black px-8 py-4 rounded-2xl font-bold flex items-center gap-2 hover:scale-105 transition">
+                <button
+                  onClick={() => navigate("/shop")}
+                  className="bg-[#C8F400] text-black px-8 py-4 rounded-2xl font-bold flex items-center gap-2 hover:scale-105 transition"
+                >
                   Shop Now
                   <ArrowRight size={18} />
                 </button>
@@ -94,13 +103,24 @@ const Home = () => {
 
             <div className="grid grid-cols-1 gap-5 w-72">
               <div className="bg-[#202A00] border border-[#3C4F00] rounded-3xl p-8 text-center">
-                <h2 className="text-5xl font-bold text-[#C8F400]">20+</h2>
-                <p className="text-[#6C6C6B] mt-2">Products Available</p>
+                <h2 className="text-5xl font-bold text-[#C8F400]">
+                  {cartItems.reduce((t, i) => t + i.quantity, 0)}
+                </h2>
+
+                <p className="text-[#6C6C6B] mt-2">Items in Cart</p>
               </div>
 
               <div className="bg-[#151515] border border-[#2A2A2A] rounded-3xl p-8 text-center">
-                <h2 className="text-5xl font-bold">Free</h2>
-                <p className="text-[#6C6C6B] mt-2">Delivery Above ₹999</p>
+                <h2
+  className="text-5xl font-bold"
+  style={{ fontFamily: "Clash Display" }}
+>
+  ${totalPrice.toFixed(2)}
+</h2>
+
+<p className="text-[#6C6C6B] mt-2">
+  Cart Total
+</p>
               </div>
             </div>
           </div>
@@ -111,25 +131,28 @@ const Home = () => {
           {[
             {
               title: "Cart Items",
-              value: "0",
+              value: cartItems.reduce(
+                (total, item) => total + item.quantity,
+                0,
+              ),
               desc: "Products in cart",
               icon: <ShoppingBag size={24} className="text-[#C8F400]" />,
             },
             {
               title: "Cart Value",
-              value: "$0",
+              value: `$${totalPrice.toFixed(2)}`,
               desc: "Ready to checkout",
               icon: <Package size={24} className="text-blue-400" />,
             },
             {
               title: "Top Products",
-              value: "20",
-              desc: "Highly rated",
+              value: "30",
+              desc: "Available in store",
               icon: <Star size={24} className="text-yellow-400" />,
             },
             {
               title: "Categories",
-              value: "4",
+              value: categories.length,
               desc: "Available",
               icon: <Tag size={24} className="text-purple-400" />,
             },
@@ -164,7 +187,10 @@ const Home = () => {
           <div className="flex justify-between items-center">
             <h2 className="text-4xl font-bold">Shop by Category</h2>
 
-            <button className="text-[#C8F400] flex items-center gap-2">
+            <button
+              onClick={() => navigate("/shop")}
+              className="text-[#C8F400] flex items-center gap-2"
+            >
               View All <ArrowRight size={18} />
             </button>
           </div>
@@ -213,16 +239,8 @@ const Home = () => {
         </section>
 
         {/* Footer */}
-        <footer className="border-t border-[#2A2A2A] mt-20 py-10 text-center">
-          <h2 className="text-4xl font-bold">
-            Sky<span className="text-[#C8F400]">Mart</span>
-          </h2>
-
-          <p className="text-[#6C6C6B] mt-4">
-            © 2025 SkyMart. Built with React & Tailwind CSS.
-          </p>
-        </footer>
       </div>
+      <Footer />
     </div>
   );
 };
